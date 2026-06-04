@@ -182,8 +182,8 @@ def render():
                     </p>
                     <div style="display:flex; align-items:center; gap:1.2rem; flex-wrap:wrap;">
                         <div>
-                            <span style="color:var(--text-muted); font-size:0.8rem; text-transform:uppercase;
-                                letter-spacing:0.5px;">Churn Probability</span><br>
+                            <span style="color:black; font-size:0.8rem; text-transform:uppercase;
+                                letter-spacing:0.5px; font-weight:500;">Churn Probability</span><br>
                             <span class="prob-display" style="color:{risk_color};">
                                 {probability * 100:.1f}%
                             </span>
@@ -204,10 +204,10 @@ def render():
                 f"""
                 <div style="margin-top:0.5rem;">
                     <div style="display:flex; justify-content:space-between; margin-bottom:4px;">
-                        <span style="color:var(--text-muted); font-size:0.78rem;">Stay</span>
-                        <span style="color:var(--text-muted); font-size:0.78rem;">Churn</span>
+                        <span style="color:black; font-size:0.78rem; font-weight:500;">Stay</span>
+                        <span style="color:black; font-size:0.78rem; font-weight:500;">Churn</span>
                     </div>
-                    <div style="background:rgba(255,255,255,0.06); border-radius:8px;
+                    <div style="background:rgba(0,0,0,0.08); border-radius:8px;
                                 height:12px; overflow:hidden;">
                         <div style="width:{probability * 100:.1f}%; height:100%;
                                     background:linear-gradient(90deg, #10b981, #f59e0b, #f43f5e);

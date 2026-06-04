@@ -14,15 +14,15 @@ def create_gauge(probability: float, risk_color: str):
             value=probability * 100,
             number=dict(
                 suffix="%",
-                font=dict(size=48, family="JetBrains Mono, monospace", color="#f1f5f9"),
+                font=dict(size=48, family="JetBrains Mono, monospace", color="black"),
             ),
             title=dict(
                 text="Churn Probability",
-                font=dict(size=16, color="#94a3b8"),
+                font=dict(size=16, color="black"),
             ),
             gauge=dict(
                 axis=dict(range=[0, 100], tickwidth=1, tickcolor="#334155",
-                          tickfont=dict(color="#64748b")),
+                          tickfont=dict(color="black")),
                 bar=dict(color=risk_color, thickness=0.25),
                 bgcolor="rgba(255,255,255,0.03)",
                 borderwidth=0,

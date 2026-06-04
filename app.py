@@ -67,5 +67,16 @@ def main():
     elif st.session_state.active_tab == "Comparison":
         model_comparison.render()
 
+    # ── Footer ───────────────────────────────────────────────────
+    st.markdown("---")
+    st.markdown(
+        """
+        <div style="text-align: center; padding: 1rem 0; color: var(--text-muted); font-size: 0.85rem;">
+            Made with ❤️ by <b>Varun Kaza</b>
+        </div>
+        """,
+        unsafe_allow_html=True,
+    )
+
 if __name__ == "__main__":
     main()
