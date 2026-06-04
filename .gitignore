@@ -1,0 +1,20 @@
+# Python caches
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+.env
+
+# Datasets (Optional depending on size, GitHub limit is 100MB per file)
+# telecom-customer-churn-dataset.csv
+# telecom_churn_cleaned.csv
+
+# Jupyter
+.ipynb_checkpoints
+
+# OS Files
+.DS_Store
+Thumbs.db
