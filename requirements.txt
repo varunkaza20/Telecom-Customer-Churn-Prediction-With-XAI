@@ -6,5 +6,4 @@ xgboost
 shap
 plotly
 matplotlib
-seaborn
 joblib

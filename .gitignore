@@ -18,3 +18,8 @@ venv/
 # OS Files
 .DS_Store
 Thumbs.db
+old_pages/
+jupyter-notebooks/
+telecom-customer-churn-dataset.csv
+telecom_churn_cleaned.csv
+refactor.py

@@ -16,11 +16,10 @@ from utils.preprocessing import FEATURE_ORDER, FEATURE_LABELS
 # Use non-interactive backend so matplotlib doesn't try to open windows
 matplotlib.use("Agg")
 
-# Path to the cleaned dataset (for global SHAP)
-_DATA_PATH = os.path.join(
-    os.path.dirname(os.path.dirname(__file__)), "telecom_churn_cleaned.csv"
+# Path to the precomputed global SHAP values
+_GLOBAL_SHAP_PATH = os.path.join(
+    os.path.dirname(os.path.dirname(__file__)), "models", "global_shap.joblib"
 )
-
 
 # ------------------------------------------------------------------
 # Caching
@@ -31,28 +30,15 @@ def get_explainer(_model):
     return shap.TreeExplainer(_model)
 
 
-@st.cache_data(ttl=3600)
-def get_global_shap_data(_explainer, _scaler):
+@st.cache_resource
+def get_global_shap_data():
     """
-    Precompute SHAP values for the full cleaned dataset.
-    Returns (shap_values, X_display) where X_display is the
-    un-scaled DataFrame used for plotting labels.
+    Load precomputed global SHAP values.
+    Returns (shap_values, X_display)
     """
-    df = pd.read_csv(_DATA_PATH)
-
-    # Reproduce engineered features
-    service_cols = ["OnlineSecurity", "OnlineBackup", "DeviceProtection", "TechSupport"]
-    df["TotalServices"] = (df[service_cols] == 2).sum(axis=1)
-    df["TenureGroup"] = pd.cut(
-        df["tenure"], bins=[0, 12, 24, 48, 100],
-        labels=[0, 1, 2, 3], include_lowest=True,
-    ).astype(int)
-    df["AvgMonthlyCharge"] = df["TotalCharges"] / (df["tenure"] + 1)
-
-    X = df.drop(columns=["Churn"])[FEATURE_ORDER]
-    X_scaled = _scaler.transform(X)
-    shap_values = _explainer.shap_values(X_scaled)
-    return shap_values, X
+    import joblib
+    data = joblib.load(_GLOBAL_SHAP_PATH)
+    return data["shap_values"], data["X_display"]
 
 
 # ------------------------------------------------------------------

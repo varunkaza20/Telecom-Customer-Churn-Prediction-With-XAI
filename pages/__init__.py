@@ -1,1 +1,1 @@
-# Telecom Churn Prediction - Pages Package
+# Initialize pages package

@@ -12,14 +12,9 @@ from config.theme import load_css
 from components.sidebar import render_sidebar
 from pages import prediction, shap_global, model_comparison
 
-
 # ── Page configuration ───────────────────────────────────────────
 st.set_page_config(**PAGE_CONFIG)
 
-
-# ═════════════════════════════════════════════════════════════════
-#  MAIN ENTRY POINT
-# ═════════════════════════════════════════════════════════════════
 def main():
     # Load CSS theme
     load_css()
@@ -71,7 +66,6 @@ def main():
         shap_global.render()
     elif st.session_state.active_tab == "Comparison":
         model_comparison.render()
-
 
 if __name__ == "__main__":
     main()

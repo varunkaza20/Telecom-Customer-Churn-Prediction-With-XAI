@@ -1,8 +1,6 @@
 import streamlit as st
-import joblib
 
 from utils.shap_utils import (
-    get_explainer,
     get_global_shap_data,
     create_summary_bar_plot,
     create_beeswarm_plot,
@@ -24,18 +22,12 @@ def render():
     )
 
     try:
-        # Load resources
-        model = joblib.load("churn_model_xgboost.pkl")
-        scaler = joblib.load("scaler.pkl")
-    except FileNotFoundError:
-        st.error("Model or scaler not found. Please train the models first.")
+        with st.spinner("Loading global SHAP values..."):
+            shap_values, X_display = get_global_shap_data()
+    except Exception as e:
+        st.error(f"Error loading precomputed SHAP data. Did you run precompute_shap.py? Details: {e}")
         st.markdown('</div>', unsafe_allow_html=True)
         return
-
-    explainer = get_explainer(model)
-    
-    with st.spinner("Computing global SHAP values..."):
-        shap_values, X_display = get_global_shap_data(explainer, scaler)
 
     st.markdown("---")
     
@@ -62,7 +54,7 @@ def render():
     
     selected_feature = st.selectbox(
         "Select Feature",
-        options=["Contract", "tenure", "MonthlyCharges", "InternetService"],
+        options=["Contract", "tenure", "MonthlyCharges"],
         index=0
     )
     
